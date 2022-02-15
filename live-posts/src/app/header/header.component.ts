@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BackEndService } from '../back-end.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _backEndService : BackEndService) { }
 
   ngOnInit(): void {
+    this.onFetch();
+  }
+  
+  onSave(){
+    console.log("onSave() is called")
+    this._backEndService.saveData();
   }
 
+  onFetch(){
+    console.log("onFetch() is called")
+    this._backEndService.fetchData();
+  }
 }
