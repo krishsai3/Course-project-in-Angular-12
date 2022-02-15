@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core'
+import { EventEmitter,Injectable } from '@angular/core'
 import { Post } from './post.model';
 
 // we can convert this normal class into service class by using decorator
 @Injectable({ providedIn: 'root' })
 export class PostService {
+    listChangedEvent: EventEmitter<Post[]> =new EventEmitter();
     listOfPosts: Post[] = [
-        new Post(
+        /*new Post(
             'Nature',
             'Nature is a British weekly scientific journal founded and based in London, England. As a multidisciplinary publication, Nature features peer-reviewed research from a variety of academic disciplines, mainly in science and technology.',
             'https://d1whtlypfis84e.cloudfront.net/guides/wp-content/uploads/2019/07/23090714/nature-1024x682.jpeg',
@@ -28,7 +29,7 @@ export class PostService {
             'test@test.com',
             new Date(),
             3
-        ),
+        ),*/
     ];
 
     // facility 1: return post
@@ -60,5 +61,10 @@ export class PostService {
     addLikes(index : number){
         this.listOfPosts[index].numberOfLikes +=  1;
     }
-
+    
+    // facility 7 : Fetching posts from database
+    setPosts(listOfPosts : Post[]){
+        this.listOfPosts = listOfPosts;
+        this.listChangedEvent.emit(listOfPosts);
+    }
 }
