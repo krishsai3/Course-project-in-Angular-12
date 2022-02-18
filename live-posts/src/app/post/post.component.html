@@ -5,8 +5,24 @@
 <p>Author : {{ post?.author }}</p>
 <p>Date : {{ post?.datetimeCreated }}</p>
 <button type = "button" class = "btn btn-primary" (click) = "onLike()">
-    <span class = "glyphicon glyphicon-thumbs-up"></span> {{ post?.numberOfLikes }} likes
+    <span class = "glyphicon glyphicon-thumbs-up"></span> {{ post?.numberOfLikes }} Likes
 </button> |
+<button type = "button" class = "btn btn-default" (click) = "onComment()">
+    <span class = "glyphicon glyphicon-comment"></span> Comment
+</button>
+<form [formGroup]="form">
+    <div *ngIf = "commentMode"><br><br>
+        <textarea class = "form-control" type = "text" formControlName = "comment"></textarea> <br><br>
+        <button class = "btn" type = "submit" (click) = "onSubmit()">Submit</button>
+    <hr></div>
+</form>
+<hr>
+<div>
+    <b>Comments</b>
+    <p style = "font-style: oblique;" *ngFor = "let comment of post?.comments">{{ comment }}</p>
+</div>
+
+<br><br>
 <button class = "btn btn-success" (click) = "onEdit()">Edit</button> |
 <button class = "btn btn-danger" (click) = "onDelete()">Delete</button>
 <hr>

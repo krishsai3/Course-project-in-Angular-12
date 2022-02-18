@@ -6,13 +6,14 @@ import { Post } from './post.model';
 export class PostService {
     listChangedEvent: EventEmitter<Post[]> =new EventEmitter();
     listOfPosts: Post[] = [
-        /*new Post(
+        new Post(
             'Nature',
             'Nature is a British weekly scientific journal founded and based in London, England. As a multidisciplinary publication, Nature features peer-reviewed research from a variety of academic disciplines, mainly in science and technology.',
             'https://d1whtlypfis84e.cloudfront.net/guides/wp-content/uploads/2019/07/23090714/nature-1024x682.jpeg',
             'test@test.com',
             new Date(),
-            5
+            5,
+            ['Beautiful',]
         ),
         new Post(
             'Hampi',
@@ -20,7 +21,8 @@ export class PostService {
             'https://www.deccanherald.com/sites/dh/files/article_images/2019/03/15/Hampi-DH-1552611002.jpg',
             'test@test.com',
             new Date(),
-            4
+            4,
+            ['Nice',]
         ),
         new Post(
             'Araku Valley',
@@ -28,8 +30,9 @@ export class PostService {
             'https://vizagtourism.org.in/images/places-to-visit/header/araku-valley-vizag-tourism-entry-fee-timings-holidays-reviews-header.jpg',
             'test@test.com',
             new Date(),
-            3
-        ),*/
+            3,
+            ['Awesome view',]
+        ),
     ];
 
     // facility 1: return post
@@ -66,5 +69,14 @@ export class PostService {
     setPosts(listOfPosts : Post[]){
         this.listOfPosts = listOfPosts;
         this.listChangedEvent.emit(listOfPosts);
+    }
+
+    // facility 8 : Adding comments
+    addComments(index : number, comment : string){
+        this.listOfPosts[index].comments.push(comment);
+    }
+
+    removeComments(index : number){
+        
     }
 }
