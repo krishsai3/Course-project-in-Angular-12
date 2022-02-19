@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <h2>{{ post?.title }}</h2>
 <p>{{ post?.description }}</p>
@@ -19,7 +20,15 @@
 <hr>
 <div>
     <b>Comments</b>
-    <p style = "font-style: oblique;" *ngFor = "let comment of post?.comments">{{ comment }}</p>
+    <p style = "font-style: oblique;" *ngFor = "let comment of post?.comments">{{ comment }}
+        <!--like icon-->
+        <i *ngIf = "likeMode" (click) = "onclick()" class="fa fa-thumbs-up"></i>
+        <i *ngIf = "!likeMode" (click) = "onclick()" class="fa fa-thumbs-down"></i>
+        <!--close icon-->
+        <button type="button" class="close" (click) = "Delete()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </p>
 </div>
 
 <br><br>

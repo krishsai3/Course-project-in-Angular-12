@@ -77,6 +77,6 @@ export class PostService {
     }
 
     removeComments(index : number){
-        
+        this.listOfPosts[index].comments.splice(index,1);
     }
 }

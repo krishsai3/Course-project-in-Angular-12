@@ -16,6 +16,7 @@ export class PostComponent implements OnInit {
   @Input() post? : Post;
   @Input() index : number = 0;
   public commentMode = false;
+  public likeMode = true;
 
   constructor(private _postService : PostService, private _router : Router) { }
 
@@ -54,5 +55,14 @@ export class PostComponent implements OnInit {
     this._postService.addComments(this.index,comment);
     console.log("onSubmit() is called.")
     this.commentMode = false;
+  }
+
+  Delete(){
+    this._postService.removeComments(this.index);
+    console.log("delete() is called")
+  }
+
+  onclick(){
+    this.likeMode = !this.likeMode;
   }
 }
