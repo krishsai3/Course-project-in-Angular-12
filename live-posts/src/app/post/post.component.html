@@ -13,23 +13,21 @@
 </button>
 <form [formGroup]="form">
     <div *ngIf = "commentMode"><br><br>
-        <textarea class = "form-control" type = "text" formControlName = "comment"></textarea> <br><br>
-        <button class = "btn" type = "submit" (click) = "onSubmit()">Submit</button>
+        <textarea class = "form-control" type = "text" formControlName = "comment" required></textarea> <br><br>
+        <button class = "btn" type = "submit" (click) = "onSubmit()" [disabled] = "form.invalid">Submit</button>
     <hr></div>
 </form>
 <hr>
-<div>
-    <b>Comments</b>
-    <p style = "font-style: oblique;" *ngFor = "let comment of post?.comments">{{ comment }}
-        <!--like icon-->
-        <i *ngIf = "likeMode" (click) = "onclick()" class="fa fa-thumbs-up"></i>
-        <i *ngIf = "!likeMode" (click) = "onclick()" class="fa fa-thumbs-down"></i>
-        <!--close icon-->
-        <button type="button" class="close" (click) = "Delete()" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </p>
-</div>
+<b>Comments</b>
+<p style = "font-style: oblique;" *ngFor = "let comment of post?.comments">{{ comment }}
+    <!--like icon-->
+    <i *ngIf = "likeMode" (click) = "onclick()" class="fa fa-thumbs-up"></i>
+    <i *ngIf = "!likeMode" (click) = "onclick()" class="fa fa-thumbs-down"></i>
+    <!--close icon-->
+    <button type="button" class="close" (click) = "Delete(comment)" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</p>
 
 <br><br>
 <button class = "btn btn-success" (click) = "onEdit()">Edit</button> |

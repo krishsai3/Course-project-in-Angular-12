@@ -21,6 +21,7 @@ export class PostEditComponent implements OnInit {
     let title = '';
     let description = '';
     let imagePath = '';
+    let comments = [''];
 
     this._activatedRoute.params.subscribe((params : Params) => {
       if (params['index']){
@@ -30,6 +31,7 @@ export class PostEditComponent implements OnInit {
         title = post.title;
         description = post.description;
         imagePath = post.imagePath;
+        comments = post.comments;
 
         this.editMode = true;
       }
@@ -37,7 +39,8 @@ export class PostEditComponent implements OnInit {
     this.form = new FormGroup({
       title: new FormControl(title, [Validators.required]),
       description: new FormControl(description, [Validators.required]),
-      imagePath: new FormControl(imagePath, [Validators.required])
+      imagePath: new FormControl(imagePath, [Validators.required]),
+      comments : new FormControl(comments,[Validators.required])
     })
   }
 
@@ -45,8 +48,9 @@ export class PostEditComponent implements OnInit {
     const title = this.form.value.title;
     const description = this.form.value.description;
     const imagePath = this.form.value.imagePath;
+    const comments = this.form.value.comments;
 
-    const post: Post = new Post(title, description, imagePath, 'test@gmail.com', new Date(),0,[]);
+    const post: Post = new Post(title, description, imagePath, 'test@gmail.com', new Date(),0,comments);
 
 
     if(this.editMode){

@@ -5,6 +5,7 @@ import { Post } from './post.model';
 @Injectable({ providedIn: 'root' })
 export class PostService {
     listChangedEvent: EventEmitter<Post[]> =new EventEmitter();
+    public ind = 0;
     listOfPosts: Post[] = [
         new Post(
             'Nature',
@@ -13,7 +14,7 @@ export class PostService {
             'test@test.com',
             new Date(),
             5,
-            ['Beautiful',]
+            ['Beautiful']
         ),
         new Post(
             'Hampi',
@@ -22,7 +23,7 @@ export class PostService {
             'test@test.com',
             new Date(),
             4,
-            ['Nice',]
+            ['Nice']
         ),
         new Post(
             'Araku Valley',
@@ -31,7 +32,7 @@ export class PostService {
             'test@test.com',
             new Date(),
             3,
-            ['Awesome view',]
+            ['Awesome view']
         ),
     ];
 
@@ -76,7 +77,8 @@ export class PostService {
         this.listOfPosts[index].comments.push(comment);
     }
 
-    removeComments(index : number){
-        this.listOfPosts[index].comments.splice(index,1);
+    removeComments(index : number, comment : string){
+        this.ind = this.listOfPosts[index].comments.indexOf(comment);
+        this.listOfPosts[index].comments.splice(this.ind,1);
     }
 }

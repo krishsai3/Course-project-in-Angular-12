@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Post } from '../post.model';
 import { PostService } from '../post.service';
@@ -15,6 +15,7 @@ export class PostComponent implements OnInit {
 
   @Input() post? : Post;
   @Input() index : number = 0;
+
   public commentMode = false;
   public likeMode = true;
 
@@ -23,7 +24,7 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
 
     this.form = new FormGroup({
-        comment : new FormControl(null),
+        comment : new FormControl(null,[Validators.required]),
       })
 
    console.log(this.post);
@@ -55,10 +56,11 @@ export class PostComponent implements OnInit {
     this._postService.addComments(this.index,comment);
     console.log("onSubmit() is called.")
     this.commentMode = false;
+    this.form.reset();
   }
 
-  Delete(){
-    this._postService.removeComments(this.index);
+  Delete(comment : string){
+    this._postService.removeComments(this.index, comment);
     console.log("delete() is called")
   }
 
